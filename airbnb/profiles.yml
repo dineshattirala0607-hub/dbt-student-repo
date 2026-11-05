@@ -1,0 +1,25 @@
+airbnb:
+  outputs:
+    dev:
+      account: FOUYGSM-CC77795
+      database: AIRBNB
+      role: TRANSFORM
+      private_key_path: "C:/Users/dinesh gowd/.dbt/dbt_key_verified.p8"
+      private_key_passphrase: "{{ env_var('DBT_ENV_SECRET_SNOWFLAKE_PRIVATE_KEY_PASSPHRASE') }}"
+      schema: DEV
+      threads: 4
+      type: snowflake
+      user: dbt
+      warehouse: compute_wh
+    prod:
+      account: FOUYGSM-CC77795
+      database: AIRBNB
+      role: TRANSFORM
+      private_key_path: "C:/Users/dinesh gowd/.dbt/dbt_key_verified.p8"
+      private_key_passphrase: "{{ env_var('DBT_ENV_SECRET_SNOWFLAKE_PRIVATE_KEY_PASSPHRASE') }}"
+      schema: PROD
+      threads: 4
+      type: snowflake
+      user: dbt
+      warehouse: compute_wh
+  target: dev
