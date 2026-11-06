@@ -13,8 +13,13 @@ SELECT
     AS review_id,
   *
   FROM src_reviews
-WHERE review_text is not null
-{% if is_incremental() %}
+  WHERE review_text IS NOT NULL
+    AND EXISTS (
+      SELECT 1
+      FROM {{ ref('dim_listings_cleansed') }} AS listings
+      WHERE listings.listing_id = src_reviews.listing_id
+    )
+  {% if is_incremental() %}
   {% if var("start_date", False) and var("end_date", False) %}
 
         {{ log('Loading ' ~ this ~ ' incrementally (start_date: ' ~ var("start_date") ~ ', end_date: ' ~ var("end_date") ~ ')', info=True) }}
